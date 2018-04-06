@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             new AsyncT().execute("Start");
         }
         catch (Exception ex) {
-            Log.d("MyTag","onButtonStart error " + ex.toString());
+            Log.d("MyTag","onButtonStart  error " + ex.toString());
         }
 
 
