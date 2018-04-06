@@ -20,7 +20,7 @@ class AsyncT extends AsyncTask<String,Void,Void> {
     protected Void doInBackground(String... params) {
 
         try {
-            Log.d("MyTag","AsyncTask   starts  ");
+            Log.d("MyTag","AsyncTask  starts  ");
             URL url = new URL("https://fcm.googleapis.com/fcm/send"); //Enter URL here
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             httpURLConnection.setDoOutput(true);
