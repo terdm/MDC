@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     String refreshedToken;
 
     TextView myAwesomeTextView;
+    TextView editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +27,27 @@ public class MainActivity extends AppCompatActivity {
         refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("Firebase", "token "+ refreshedToken);
         myAwesomeTextView = (TextView)findViewById(R.id.myAwesomeTextView);
+        editText = (TextView)findViewById(R.id.editText);
         myAwesomeTextView.setText(refreshedToken);
+        editText.setText("onCreate");
 
         //asyncT = new AsyncT();
     }
 
     public void onButtonLog(View v) {
         Log.d("MyTag","onButtonLog starts ");
+        editText.setText("onButtonLog strats");
         //String[] cmd = new String[] { "logcat", "-f", "/storage/extSdCard/log/MyTag", "-v", "time", "ActivityManager:W", "myapp:D" };
         String[] cmd = new String[] { "logcat", "-f", "/storage/emulated/0/log/MyTag", "-v", "time", "ActivityManager:W", "myapp:D" };
         try {
             Runtime.getRuntime().exec(cmd);
+            editText.setText("Log saved to file");
+
         }
         catch (IOException e) {
             Log.d("MyTag",e.toString());
+            editText.setText("onButtonLog Error " +  e.toString());
+
         }
 
     }
@@ -50,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
         try {
             //asyncT.execute("Start");}
             new AsyncT().execute("Start");
+            editText.setText("onButtonStart");
         }
         catch (Exception ex) {
             Log.d("MyTag","onButtonStart  error " + ex.toString());
+            editText.setText("onButtonStart error " + ex.toString());
         }
 
 
@@ -63,9 +73,11 @@ public class MainActivity extends AppCompatActivity {
         try {
           //asyncT.execute("Stop");}
             new AsyncT().execute("Stop");
+            editText.setText("onButtonStop");
         }
         catch (Exception ex) {
             Log.d("MyTag","onButtonStop error " + ex.toString());
+            editText.setText("onButtonStop error " + ex.toString());
         }
 
 
