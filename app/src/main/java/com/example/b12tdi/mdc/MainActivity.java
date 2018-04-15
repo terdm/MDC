@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView myAwesomeTextView;
     TextView editText;
+    String[] detectors = {"e9Acm88_C_U:APA91bHCtb4ex9_2hDKhhtLxL_7kX7Y747M7UkjSTX5iHuNJdacJ3pT9oMtW_FLRkT7OXGLZgP5MReYH9Wlz3abMwzqYm671aj3vritzkm-mgLh52Dq1GsfbloozESGclKmzFrERQm6p","eYn1KPG5u-Y:APA91bHcjmzb-tN_BnuBLFd1WkqStZ2-Ie1B54vWNItyvmF3iMWB3yNjyghtyBUbh2XIm-Q5POs9RRI9L3OiRtgpkcypvei_aCbGQHBVQ1FwT4NA7tmaQntYdu4CKigOwGTyDO8CRssk"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             //asyncT.execute("Start");}
-            new AsyncT().execute("Start",refreshedToken);
+            new AsyncT().execute("Start",refreshedToken,detectors[0]);
+            new AsyncT().execute("Start",refreshedToken,detectors[1]);
             editText.setText("onButtonStart");
         }
         catch (Exception ex) {
@@ -76,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MyTag","onButtonStop stop ");
         try {
           //asyncT.execute("Stop");}
-            new AsyncT().execute("Stop",refreshedToken);
+            new AsyncT().execute("Stop",refreshedToken,detectors[0]);
+            new AsyncT().execute("Stop",refreshedToken,detectors[1]);
+
             editText.setText("onButtonStop");
         }
         catch (Exception ex) {

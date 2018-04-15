@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 class AsyncT extends AsyncTask<String,Void,Void> {
+    // 0 black 1 white
 
     @Override
     protected Void doInBackground(String... params) {
@@ -38,7 +39,8 @@ class AsyncT extends AsyncTask<String,Void,Void> {
             //black
             //jsonObject.put("to", "e9Acm88_C_U:APA91bHCtb4ex9_2hDKhhtLxL_7kX7Y747M7UkjSTX5iHuNJdacJ3pT9oMtW_FLRkT7OXGLZgP5MReYH9Wlz3abMwzqYm671aj3vritzkm-mgLh52Dq1GsfbloozESGclKmzFrERQm6p");
             // white
-            jsonObject.put("to", "eYn1KPG5u-Y:APA91bHcjmzb-tN_BnuBLFd1WkqStZ2-Ie1B54vWNItyvmF3iMWB3yNjyghtyBUbh2XIm-Q5POs9RRI9L3OiRtgpkcypvei_aCbGQHBVQ1FwT4NA7tmaQntYdu4CKigOwGTyDO8CRssk");
+            //jsonObject.put("to", "eYn1KPG5u-Y:APA91bHcjmzb-tN_BnuBLFd1WkqStZ2-Ie1B54vWNItyvmF3iMWB3yNjyghtyBUbh2XIm-Q5POs9RRI9L3OiRtgpkcypvei_aCbGQHBVQ1FwT4NA7tmaQntYdu4CKigOwGTyDO8CRssk");
+            jsonObject.put("to",params[2]);
             Log.d("MyTag","AsyncTask  before DataOutputStream");
             DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
 
