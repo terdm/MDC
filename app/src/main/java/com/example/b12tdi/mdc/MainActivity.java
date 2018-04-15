@@ -1,5 +1,6 @@
 package com.example.b12tdi.mdc;
 
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,10 +39,13 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MyTag","onButtonLog starts ");
         editText.setText("onButtonLog strats");
         //String[] cmd = new String[] { "logcat", "-f", "/storage/extSdCard/log/MyTag", "-v", "time", "ActivityManager:W", "myapp:D" };
-        String[] cmd = new String[] { "logcat", "-f", "/storage/emulated/0/log/MyTag", "-v", "time", "ActivityManager:W", "myapp:D" };
+        //String[] cmd = new String[] { "logcat", "-f", "/storage/emulated/0/log/MyTag", "-v", "time", "ActivityManager:W", "myapp:D" };
+        String filePath = Environment.getExternalStorageDirectory() + "/logcat.txt";
+        String[] cmd = new String[] { "logcat", "-f", filePath, "MyAppTAG:V", "*:S"};
+
         try {
             Runtime.getRuntime().exec(cmd);
-            editText.setText("Log saved to file");
+            editText.setText("Log saved to file "+ filePath);
 
         }
         catch (IOException e) {
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             //asyncT.execute("Start");}
-            new AsyncT().execute("Start");
+            new AsyncT().execute("Start",refreshedToken);
             editText.setText("onButtonStart");
         }
         catch (Exception ex) {
@@ -72,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MyTag","onButtonStop stop ");
         try {
           //asyncT.execute("Stop");}
-            new AsyncT().execute("Stop");
+            new AsyncT().execute("Stop",refreshedToken);
             editText.setText("onButtonStop");
         }
         catch (Exception ex) {

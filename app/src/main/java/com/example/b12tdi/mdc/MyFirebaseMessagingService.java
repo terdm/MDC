@@ -67,6 +67,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
+        /*
+        //этот кусок взят из messaging. здесь не предполагается запуск детектора
         Log.d(TAG, " before getPackageManager().getLaunchIntentForPackage ");
         Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.diter.motiondetection");
         launchIntent.putExtra("Hii",remoteMessage.getData().toString());
@@ -78,7 +80,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         //ter 20180407 хорошо бы ответить отправителю, что старт/стоп прошёл
-
+*/
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
