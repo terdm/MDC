@@ -1,6 +1,11 @@
 package com.example.b12tdi.mdc;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Environment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
         myAwesomeTextView.setText(refreshedToken);
         editText.setText("onCreate");
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                new BroadcastReceiver() {
+                    @Override
+                    public void onReceive(Context context, Intent intent) {
+                        String message = intent.getStringExtra(MyFirebaseMessagingService.EXTRA_MESSAGE);
+
+                        editText.setText(message);
+                    }
+                }, new IntentFilter(MyFirebaseMessagingService.ACTION_MESSAGE_BROADCAST)
+        );
+
         //asyncT = new AsyncT();
     }
 
@@ -52,9 +68,30 @@ public class MainActivity extends AppCompatActivity {
         catch (IOException e) {
             Log.d("MyTag",e.toString());
             editText.setText("onButtonLog Error " +  e.toString());
-
         }
+    }
+    public void onW_Log(View v) {
+        Log.d("MyTag","onW_Log starts ");
+        try {
+            new AsyncT().execute("Log",refreshedToken,detectors[1]);
+            editText.setText("onW_Log");
+        }
+        catch (Exception ex) {
+            Log.d("MyTag","onW_Log  error " + ex.toString());
+            editText.setText("onW_Log error " + ex.toString());
+        }
+    }
 
+    public void onB_Log(View v) {
+        Log.d("MyTag","onB_Log starts ");
+        try {
+            new AsyncT().execute("Log",refreshedToken,detectors[0]);
+            editText.setText("onB_Log");
+        }
+        catch (Exception ex) {
+            Log.d("MyTag","onB_Log  error " + ex.toString());
+            editText.setText("onB_Log error " + ex.toString());
+        }
     }
 
     public void onButtonStart(View v) {
@@ -70,14 +107,42 @@ public class MainActivity extends AppCompatActivity {
             Log.d("MyTag","onButtonStart  error " + ex.toString());
             editText.setText("onButtonStart error " + ex.toString());
         }
+    }
 
+    public void onW_Start(View v) {
+        Log.d("MyTag","onW_Start starts ");
 
+        try {
+            //asyncT.execute("Start");}
+
+            new AsyncT().execute("Start",refreshedToken,detectors[1]);
+            editText.setText("onW_Start");
+        }
+        catch (Exception ex) {
+            Log.d("MyTag","onW_Start  error " + ex.toString());
+            editText.setText("onW_Start error " + ex.toString());
+        }
+    }
+
+    public void onB_Start(View v) {
+        Log.d("MyTag","onB_Start starts ");
+
+        try {
+            //asyncT.execute("Start");}
+            new AsyncT().execute("Start",refreshedToken,detectors[0]);
+
+            editText.setText("onB_Start");
+        }
+        catch (Exception ex) {
+            Log.d("MyTag","onB_Start  error " + ex.toString());
+            editText.setText("onB_Start error " + ex.toString());
+        }
     }
 
     public void onButtonStop(View v) {
         Log.d("MyTag","onButtonStop stop ");
         try {
-          //asyncT.execute("Stop");}
+            //asyncT.execute("Stop");}
             new AsyncT().execute("Stop",refreshedToken,detectors[0]);
             new AsyncT().execute("Stop",refreshedToken,detectors[1]);
 
@@ -87,8 +152,36 @@ public class MainActivity extends AppCompatActivity {
             Log.d("MyTag","onButtonStop error " + ex.toString());
             editText.setText("onButtonStop error " + ex.toString());
         }
+    }
 
+    public void onW_Stop(View v) {
+        Log.d("MyTag","onW_Stop stop ");
+        try {
+            //asyncT.execute("Stop");}
 
+            new AsyncT().execute("Stop",refreshedToken,detectors[1]);
+
+            editText.setText("onW_Stop");
+        }
+        catch (Exception ex) {
+            Log.d("MyTag","onW_Stop error " + ex.toString());
+            editText.setText("onW_Stop error " + ex.toString());
+        }
+    }
+
+    public void onB_Stop(View v) {
+        Log.d("MyTag","onB_Stop stop ");
+        try {
+            //asyncT.execute("Stop");}
+
+            new AsyncT().execute("Stop",refreshedToken,detectors[0]);
+
+            editText.setText("onB_Stop");
+        }
+        catch (Exception ex) {
+            Log.d("MyTag","onB_Stop error " + ex.toString());
+            editText.setText("onB_Stop error " + ex.toString());
+        }
     }
 
 }

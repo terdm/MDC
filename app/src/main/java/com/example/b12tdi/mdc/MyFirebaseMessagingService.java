@@ -23,12 +23,17 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+
+    public static final String
+            ACTION_MESSAGE_BROADCAST = MyFirebaseMessagingService.class.getName() + "MessageBroadcast",
+            EXTRA_MESSAGE = "extra_message";
 
     private static final String TAG = "MyTag";
     @Override
@@ -67,6 +72,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
+        sendBroadcastMessage(remoteMessage.getNotification().getBody());
+
         /*
         //этот кусок взят из messaging. здесь не предполагается запуск детектора
         Log.d(TAG, " before getPackageManager().getLaunchIntentForPackage ");
@@ -112,7 +119,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
+    private void sendBroadcastMessage(String message) {
+        if (message != null) {
+            Intent intent = new Intent(ACTION_MESSAGE_BROADCAST);
+            intent.putExtra(EXTRA_MESSAGE, message);
 
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+        }
+    }
     @Override
     public void onDestroy() {
         // The service is no longer used and is being destroyed
