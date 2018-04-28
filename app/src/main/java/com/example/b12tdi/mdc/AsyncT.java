@@ -33,7 +33,9 @@ class AsyncT extends AsyncTask<String,Void,Void> {
             JSONObject jsonObject = new JSONObject();
             JSONObject param = new JSONObject();
             param.put("Hii",params[0]);
+
             param.put("From",params[1]);
+
 
             jsonObject.put("data",param);
             //black
